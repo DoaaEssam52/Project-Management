@@ -11,13 +11,13 @@ const routes: Routes = [
     component: AuthenticationComponent,
     children: [
       {
+        path: 'register-account',
+        component: RegisterComponent,
+      },
+      {
         path: 'verify-account',
         component: VerifyAccountComponent,
       },
-      {
-        path: "register-account",
-        component: RegisterComponent,
-      }
     ],
   },
 ];
@@ -26,4 +26,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthenticationRoutingModule { }
+export class AuthenticationRoutingModule {}

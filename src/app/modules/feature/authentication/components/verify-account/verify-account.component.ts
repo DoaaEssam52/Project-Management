@@ -13,8 +13,6 @@ import { AuthService } from '../../services/auth.service';
 import { VerifyAccountRequest } from '../../models/verify-account-request-model';
 
 @Component({
-
-
   selector: 'verify-account',
   templateUrl: './verify-account.component.html',
   styleUrls: ['./verify-account.component.scss'],
@@ -33,6 +31,11 @@ export class VerifyAccountComponent {
   });
 
   constructor(private _auth: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this._auth.authTitle.next('Verify Account');
+    this._auth.authBackgroundImage.next('assets/images/bg-3.jpeg');
+  }
 
   submit(): void {
     this.verifyForm.markAllAsTouched();
