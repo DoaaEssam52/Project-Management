@@ -11,23 +11,35 @@ import { MatchPasswordValidator } from '../../validations/match-password-validat
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent {
-public AuthErrorMessages = AuthErrorMessages;
-matcher = new ErrorStateMatcher();
-hide:boolean=true; 
+  public AuthErrorMessages = AuthErrorMessages;
+  matcher = new ErrorStateMatcher();
+  hide: boolean = true;
 
-resetPasswordForm = new FormGroup({
-  email: new FormControl('', [Validators.required, Validators.email]),
-  seed:new FormControl('',Validators.required),
-  password:new FormControl('',[Validators.required,Validators.pattern(AuthValidations.password.pattern)]),
-  confirmpassword:new FormControl('',[Validators.required,Validators.pattern(AuthValidations.password.pattern)]),
-  },
+  resetPasswordForm = new FormGroup(
+    {
+      email: new FormControl('', [Validators.required, Validators.email]),
+      seed: new FormControl('', Validators.required),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(AuthValidations.password.pattern),
+      ]),
+      confirmpassword: new FormControl('', [
+        Validators.required,
+        Validators.pattern(AuthValidations.password.pattern),
+      ]),
+    },
     [MatchPasswordValidator('password', 'confirmpassword')]
   );
 
   constructor(private _auth: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this._auth.authTitle.next('Reset Password');
+    this._auth.authBackgroundImage.next('assets/images/bg-3.jpeg');
+  }
 
   submit(): void {
     this.resetPasswordForm.markAllAsTouched();
@@ -37,7 +49,7 @@ resetPasswordForm = new FormGroup({
         .resetPassword(this.resetPasswordForm.value as ResetPasswordRequest)
         .subscribe({
           next: () => {
-            this.router.navigateByUrl('/auth/login');
+            // this.router.navigateByUrl('/auth/login');
           },
         });
     }

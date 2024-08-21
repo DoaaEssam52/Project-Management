@@ -17,8 +17,8 @@ import { ResetPasswordRequest } from '../models/reset-password-request';
 export class AuthService {
   constructor(private _http: HttpClient) {}
 
-  authTitle = new BehaviorSubject<string>('initial value');
-  authBackgroundImage = new BehaviorSubject<string>('initial value');
+  authTitle = new BehaviorSubject<string>('');
+  authBackgroundImage = new BehaviorSubject<string>('');
 
   // Http Calls
   // Verify account by sending a PUT request
@@ -29,9 +29,7 @@ export class AuthService {
     );
   }
 
-
-
-  checkEmail(email: string): Observable<string> { 
+  checkEmail(email: string): Observable<string> {
     return this._http.post<string>(
       Endpoints.baseUrl + Endpoints.authBaseUrl + Endpoints.checkEmail,
       email
@@ -43,10 +41,10 @@ export class AuthService {
       Endpoints.baseUrl + Endpoints.authBaseUrl + Endpoints.resetPassword,
       form
     );
+  }
 
   // Register a user by sending a POST request with FormData
   fetchRegister(regForm: FormData): Observable<any> {
     return this._http.post('Users/Register', regForm);
-
   }
 }

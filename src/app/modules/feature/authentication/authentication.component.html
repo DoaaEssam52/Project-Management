@@ -1,5 +1,6 @@
 <div
   class="auth-container d-flex mx-0 justify-content-center align-items-center"
+  [ngStyle]="{ 'background-image': 'url(' + backgroundImage + ')' }"
 >
   <div>
     <div class="text-center mb-2">
@@ -7,8 +8,8 @@
     </div>
 
     <div class="form-container p-5 rounded-4">
-      <h6 class="text-white">welcome to PMS</h6>
-      <h2 class="text-accent">Verify Account</h2>
+      <h3 class="text-white mb-2">welcome to PMS</h3>
+      <h1 class="text-accent fw-medium">{{ title }}</h1>
 
       <router-outlet></router-outlet>
     </div>

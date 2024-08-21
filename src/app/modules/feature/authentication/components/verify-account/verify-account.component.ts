@@ -9,6 +9,7 @@ import { AuthValidations } from '../../validations/auth-validations';
 import { AuthErrorMessages } from '../../validations/auth-error-messages';
 
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 import { VerifyAccountRequest } from '../../models/verify-account-request-model';
 
@@ -30,7 +31,11 @@ export class VerifyAccountComponent {
     ]),
   });
 
-  constructor(private _auth: AuthService, private router: Router) {}
+  constructor(
+    private _auth: AuthService,
+    private router: Router,
+    private _toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this._auth.authTitle.next('Verify Account');
@@ -45,7 +50,9 @@ export class VerifyAccountComponent {
         .verifyAccount(this.verifyForm.value as VerifyAccountRequest)
         .subscribe({
           next: () => {
-            this.router.navigateByUrl('/auth/login');
+            this._toastr.success('Account created successfully.');
+
+            // this.router.navigateByUrl('/auth/login');
           },
         });
     }

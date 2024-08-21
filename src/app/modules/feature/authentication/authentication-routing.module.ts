@@ -9,12 +9,12 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 
 import { RegisterComponent } from './components/register/register.component';
 
-
 const routes: Routes = [
   {
     path: '',
     component: AuthenticationComponent,
     children: [
+      { path: '', redirectTo: 'register-account', pathMatch: 'full' },
       {
         path: 'register-account',
         component: RegisterComponent,
@@ -24,7 +24,6 @@ const routes: Routes = [
         component: VerifyAccountComponent,
       },
       {
-
         path: 'forget-password',
         component: ForgetPasswordComponent,
       },
@@ -32,10 +31,6 @@ const routes: Routes = [
         path: 'reset-password',
         component: ResetPasswordComponent,
       },
-      {
-        path: "register-account",
-        component: RegisterComponent,
-      }
     ],
   },
 ];
